@@ -12,6 +12,18 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  // ─── API Proxy ───────────────────────────────────────────────
+  // All requests to /api/* are forwarded to your backend.
+  // The real backend URL is never exposed to the browser.
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.API_BASE_URL}/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
